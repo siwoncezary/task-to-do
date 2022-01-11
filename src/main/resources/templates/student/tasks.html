@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h1>Twoje zadania</h1>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Nazwa
+                    </th>
+                    <th>
+                        Termin ostatecznego wykonania
+                    </th>
+                    <th>
+                        Termin wykonania
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="st: ${tasks}">
+                    <td>
+                        <span th:text="${st.getTask().getName()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${st.getTask().getDeadline()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${st.getFinishDate()}"></span>
+                    </td>
+                    <td>
+                        <a href="/student/task">Przejdź do wykonania zadania</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
