@@ -37,7 +37,10 @@
                         <span th:text="${st.getFinishDate()}"></span>
                     </td>
                     <td>
+                        <p th:if="${st.note == 0}">Brak punktow</p>
+                        <p th:if="${st.note != 0}"><span th:text="${st.note}"> </span></p>
                         <a th:href="@{/student/task/{id}(id = ${st.getId()})}">Przejdź do wykonania zadania</a>
+                        <a th:href="@{/student/task-details/{id}(id=${st.getId()})}">Przejdź do szczegółów zadania</a>
                     </td>
                 </tr>
             </tbody>

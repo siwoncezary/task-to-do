@@ -1,8 +1,10 @@
 package pl.sda.tasktodo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.tasktodo.entity.Student;
 import pl.sda.tasktodo.entity.StudentTask;
 import pl.sda.tasktodo.service.StudentService;
 
@@ -16,9 +18,9 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/student/{id}")
-    public String tasks(@PathVariable long id, Model model){
-        model.addAttribute("tasks", studentService.findAllTaskForStudent(id));
+    @GetMapping("/student")
+    public String tasks(@AuthenticationPrincipal Student student, Model model){
+        model.addAttribute("tasks", studentService.findAllTaskForStudent(student.getId()));
         return "/student/tasks";
     }
 
@@ -37,6 +39,17 @@ public class StudentController {
     @PostMapping("/student/finish-task")
     public String finishStudentTask(@ModelAttribute StudentTask studentTask){
         studentService.finishStudentTask(0, studentTask);
-        return "redirect:/student/" + studentTask.getId();
+        return "redirect:/student";
+    }
+
+    @GetMapping("/student/task-details/{id}")
+    public String showTaskDetailsForm(@PathVariable long id, Model model){
+        final Optional<StudentTask> taskOptional = studentService.findStudentTaskById(id);
+        if (taskOptional.isPresent()){
+            model.addAttribute("taskDetails", taskOptional.get().getTask());
+            return "/student/task-details";
+        }
+        model.addAttribute("message", "Brak takiego zadania!");
+        return "error";
     }
 }

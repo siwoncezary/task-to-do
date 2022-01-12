@@ -33,7 +33,7 @@ public class TaskToDoApplication implements CommandLineRunner {
         seedData();
     }
 
-    public void seedData(){
+    public void seedData() {
         final Task test = taskRepository.save(Task.builder()
                 .name("Test")
                 .description("Kliknij na link i wypełnij test: www.test.pl")
@@ -43,10 +43,18 @@ public class TaskToDoApplication implements CommandLineRunner {
         final Student student1 = studentRepository.save(Student.builder()
                 .firstName("Adam")
                 .lastName("Nowak")
+                .email("adam@sda.pl")
+                .password("1234")
+                .role("ROLE_STUDENT")
+                .enabled(true)
                 .build());
         final Student student2 = studentRepository.save(Student.builder()
                 .firstName("Ewa")
                 .lastName("Kowal")
+                .email("ewa@sda.pl")
+                .password("abcd")
+                .role("ROLE_STUDENT")
+                .enabled(true)
                 .build());
         studentTaskRepository.save(StudentTask.builder().task(test).student(student1).build());
         studentTaskRepository.save(StudentTask.builder().task(test).student(student2).build());
