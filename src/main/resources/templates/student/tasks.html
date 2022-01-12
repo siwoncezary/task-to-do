@@ -37,7 +37,7 @@
                         <span th:text="${st.getFinishDate()}"></span>
                     </td>
                     <td>
-                        <a href="/student/task">Przejdź do wykonania zadania</a>
+                        <a th:href="@{/student/task/{id}(id = ${st.getId()})}">Przejdź do wykonania zadania</a>
                     </td>
                 </tr>
             </tbody>
