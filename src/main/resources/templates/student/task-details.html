@@ -2,15 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:insert="main::head">
 </head>
 <body>
+<nav th:replace="main::navigation">
+</nav>
     <div>
         <p>Nazwa zadania<span th:text="${taskDetails.name}"> </span></p>
         <p>Maksymalna liczba punktów<span th:text="${taskDetails.max}"> </span></p>
         <p>Opis zadania<span th:text="${taskDetails.description}"> </span></p>
     </div>
+<footer th:insert="main::footer">
+</footer>
 </body>
 </html>

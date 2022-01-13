@@ -2,16 +2,16 @@
 <html lang="en">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:insert="main::head">
 </head>
 <body>
-    <div>
+<nav th:replace="main::navigation">
+</nav>
+    <div class="fluid-container m-3">
         <h1>Twoje zadania</h1>
     </div>
-    <div>
-        <table>
+    <div class="fluid-container m-3">
+        <table class="table">
             <thead>
                 <tr>
                     <th>
@@ -28,13 +28,13 @@
             <tbody>
                 <tr th:each="st: ${tasks}">
                     <td>
-                        <span th:text="${st.getTask().getName()}"></span>
+                        <span th:text="${st.getTask().getName()}">AA</span>
                     </td>
                     <td>
-                        <span th:text="${st.getTask().getDeadline()}"></span>
+                        <span th:text="${st.getTask().getDeadline()}">AA</span>
                     </td>
                     <td>
-                        <span th:text="${st.getFinishDate()}"></span>
+                        <span th:text="${st.getFinishDate()}">BB</span>
                     </td>
                     <td>
                         <p th:if="${st.note == 0}">Brak punktow</p>
@@ -46,5 +46,7 @@
             </tbody>
         </table>
     </div>
+<footer th:insert="main::footer">
+</footer>
 </body>
 </html>
