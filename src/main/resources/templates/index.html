@@ -11,6 +11,15 @@
         <div class="container">
             <h2>Aplikacja z zadaniami</h2>
         </div>
+        <h3>Konfiguracja</h3>
+        <ul>
+            <li>
+                Domyślny rozmiar strony: <span th:text="${pageSize}"></span>
+            </li>
+            <li>
+                Domyślna strona: <span th:text="${pageStart}"></span>
+            </li>
+        </ul>
         <div class="container">
         <ul class="nav flex-column">
             <li class="nav-item">

@@ -2,6 +2,7 @@ package pl.sda.tasktodo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.tasktodo.entity.Student;
 import pl.sda.tasktodo.entity.StudentTask;
 import pl.sda.tasktodo.repository.StudentRepository;
@@ -39,8 +40,8 @@ public class JpaStudentService implements StudentService{
     }
 
     @Override
+    @Transactional
     public void finishStudentTask(long studentId, StudentTask task) {
-        System.out.println("FINISH TASK");
         final Optional<StudentTask> taskOptional = studentTaskRepository.findById(task.getId());
         if (taskOptional.isPresent()){
             var originalTask = taskOptional.get();

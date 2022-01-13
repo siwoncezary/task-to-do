@@ -11,7 +11,7 @@
         <h1>Twoje zadania</h1>
     </div>
     <div class="fluid-container m-3">
-        <table class="table">
+        <table th:class="${tableColor}">
             <thead>
                 <tr>
                     <th>
@@ -28,7 +28,8 @@
             <tbody>
                 <tr th:each="st: ${tasks}">
                     <td>
-                        <span th:text="${st.getTask().getName()}">AA</span>
+                        <div th:text="${st.getTask().getName()}">AA</div>
+                        <div th:text="${st.content}"></div>
                     </td>
                     <td>
                         <span th:text="${st.getTask().getDeadline()}">AA</span>

@@ -4,6 +4,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.tasktodo.config.AppConfiguration;
+import pl.sda.tasktodo.config.IAppConfiguration;
 import pl.sda.tasktodo.entity.Student;
 import pl.sda.tasktodo.entity.StudentTask;
 import pl.sda.tasktodo.service.StudentService;
@@ -13,13 +15,16 @@ import java.util.Optional;
 @Controller
 public class StudentController {
     private final StudentService studentService;
+    private final IAppConfiguration configuration;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, IAppConfiguration configuration) {
         this.studentService = studentService;
+        this.configuration = configuration;
     }
 
     @GetMapping("/student")
     public String tasks(@AuthenticationPrincipal Student student, Model model){
+        model.addAttribute("tableColor", configuration.getTableColor() + " table");
         model.addAttribute("tasks", studentService.findAllTaskForStudent(student.getId()));
         return "/student/tasks";
     }

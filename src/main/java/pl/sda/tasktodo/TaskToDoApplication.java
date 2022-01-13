@@ -3,6 +3,7 @@ package pl.sda.tasktodo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pl.sda.tasktodo.config.AppConfiguration;
 import pl.sda.tasktodo.entity.Student;
 import pl.sda.tasktodo.entity.StudentTask;
 import pl.sda.tasktodo.entity.Task;
@@ -17,11 +18,13 @@ public class TaskToDoApplication implements CommandLineRunner {
     private final StudentTaskRepository studentTaskRepository;
     private final StudentRepository studentRepository;
     private final TaskRepository taskRepository;
+    private final AppConfiguration configuration;
 
-    public TaskToDoApplication(StudentTaskRepository studentTaskRepository, StudentRepository studentRepository, TaskRepository taskRepository) {
+    public TaskToDoApplication(StudentTaskRepository studentTaskRepository, StudentRepository studentRepository, TaskRepository taskRepository, AppConfiguration configuration) {
         this.studentTaskRepository = studentTaskRepository;
         this.studentRepository = studentRepository;
         this.taskRepository = taskRepository;
+        this.configuration = configuration;
     }
 
     public static void main(String[] args) {
@@ -30,6 +33,7 @@ public class TaskToDoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println(configuration.getPassword());
         seedData();
     }
 
