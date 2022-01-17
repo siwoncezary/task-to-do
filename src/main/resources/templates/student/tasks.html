@@ -28,6 +28,9 @@
                     <th>
                         Operacje
                     </th>
+                    <th>
+                        Zawartość
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,6 +49,9 @@
                     <td>
                         <a class="btn btn-primary" th:href="@{/student/task/{id}(id = ${st.getId()})}">Wykonaj</a>
                         <a class="btn btn-info" th:href="@{/student/task-details/{id}(id=${st.getId()})}">Szczegóły</a>
+                    </td>
+                    <td>
+                        <span th:if="${st.content != null}" th:text="${st.content}"></span>
                     </td>
                 </tr>
                 </tbody>
