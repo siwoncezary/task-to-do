@@ -34,7 +34,7 @@ public class StudentController {
         return "./student/tasks";
     }
 
-    @GetMapping("./student/task/{id}")
+    @GetMapping("/student/task/{id}")
     public String showTaskForm(@PathVariable long id, Model model){
         //TODO dodać do serwisu wyciąganie jednego zadania
         final Optional<StudentTask> studentTask = studentService.findStudentTaskById(id);
