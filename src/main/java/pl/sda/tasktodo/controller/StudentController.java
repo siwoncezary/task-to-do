@@ -31,16 +31,16 @@ public class StudentController {
     public String tasks(@AuthenticationPrincipal Student student, Model model){
         model.addAttribute("tableColor", configuration.getTableColor() + " table");
         model.addAttribute("tasks", studentService.findAllTaskForStudent(student.getId()));
-        return "/student/tasks";
+        return "./student/tasks";
     }
 
-    @GetMapping("/student/task/{id}")
+    @GetMapping("./student/task/{id}")
     public String showTaskForm(@PathVariable long id, Model model){
         //TODO dodać do serwisu wyciąganie jednego zadania
         final Optional<StudentTask> studentTask = studentService.findStudentTaskById(id);
         if (studentTask.isPresent()) {
             model.addAttribute("task", StudentTaskMapper.toDto(studentTask.get()));
-            return "/student/task-form";
+            return "./student/task-form";
         }
         model.addAttribute("message", "Nie ma takie zdania dla studenta!!!");
         return "error";
@@ -52,13 +52,13 @@ public class StudentController {
         if (errors.hasErrors()) {
                 model.addAttribute("task", dto);
                 model.addAttribute("errors", errors);
-                return "/student/task-form";
+                return "./student/task-form";
         }
         studentService.finishStudentTask(0, StudentTask.builder()
                 .id(dto.getId())
                 .content(dto.getContent())
                 .build());
-        return "redirect:/student";
+        return "redirect:./student";
     }
 
     @GetMapping("/student/task-details/{id}")
@@ -66,7 +66,7 @@ public class StudentController {
         final Optional<StudentTask> taskOptional = studentService.findStudentTaskById(id);
         if (taskOptional.isPresent()){
             model.addAttribute("taskDetails", taskOptional.get().getTask());
-            return "/student/task-details";
+            return "./student/task-details";
         }
         model.addAttribute("message", "Brak takiego zadania!");
         return "error";
