@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @Profile("dev")
 public class AppConfiguration implements IAppConfiguration{
-
     @Value("${page.size}")
     private int pageSize;
     @Value("${page.start}")
