@@ -3,13 +3,18 @@ package pl.sda.tasktodo.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.tasktodo.config.AppConfiguration;
 import pl.sda.tasktodo.config.IAppConfiguration;
+import pl.sda.tasktodo.dto.StudentTaskDto;
 import pl.sda.tasktodo.entity.Student;
 import pl.sda.tasktodo.entity.StudentTask;
+import pl.sda.tasktodo.mapper.StudentTaskMapper;
 import pl.sda.tasktodo.service.StudentService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -34,7 +39,7 @@ public class StudentController {
         //TODO dodać do serwisu wyciąganie jednego zadania
         final Optional<StudentTask> studentTask = studentService.findStudentTaskById(id);
         if (studentTask.isPresent()) {
-            model.addAttribute("task", studentTask.get());
+            model.addAttribute("task", StudentTaskMapper.toDto(studentTask.get()));
             return "/student/task-form";
         }
         model.addAttribute("message", "Nie ma takie zdania dla studenta!!!");
@@ -42,8 +47,17 @@ public class StudentController {
     }
 
     @PostMapping("/student/finish-task")
-    public String finishStudentTask(@ModelAttribute StudentTask studentTask){
-        studentService.finishStudentTask(0, studentTask);
+    public String finishStudentTask(@Valid @ModelAttribute  StudentTaskDto dto, Errors errors, Model model){
+
+        if (errors.hasErrors()) {
+                model.addAttribute("task", dto);
+                model.addAttribute("errors", errors);
+                return "/student/task-form";
+        }
+        studentService.finishStudentTask(0, StudentTask.builder()
+                .id(dto.getId())
+                .content(dto.getContent())
+                .build());
         return "redirect:/student";
     }
 

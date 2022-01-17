@@ -7,19 +7,25 @@
 <body>
 <nav th:replace="main::navigation">
 </nav>
-<div class="container">
-    <h1>Wykonaj zadanie</h1>
-    <h2 th:text="${task.task.name}"></h2>
-    <div class="container m-3">
+<div class="container col-6">
+    <div class="row align-items-center">
+        <h1 class="display-3">Wykonaj zadanie: <strong th:text="${task.name}"> </strong></h1>
+    </div>
+    <div class="row align-items-center">
         <form th:object="${task}" th:action="@{/student/finish-task}" method="post">
-
             <input class="form-control" type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{name}">
             <div class="mb-3">
-                 <textarea class="form-control" th:text="*{task.description}" readonly>
-                 </textarea><br>
+                <label> Opis zadania</label>
+                <textarea class="form-control" th:text="*{description}" readonly>
+                </textarea>
             </div>
             <div class="mb-3">
+                <label>Treść wykonania</label>
                 <input class="form-control" type="text" th:field="*{content}"/>
+                <span class="text-danger"
+                      th:if="${errors!= null && errors.hasFieldErrors('content')}"
+                      th:text="${errors.getFieldError('content').getDefaultMessage()}">Błąd zawartości.</span>
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary" type="submit">Zatwierdź wykonanie</button>

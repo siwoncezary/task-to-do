@@ -7,11 +7,16 @@
 <body>
 <nav th:replace="main::navigation">
 </nav>
-    <div>
-        <p>Nazwa zadania<span th:text="${taskDetails.name}"> </span></p>
-        <p>Maksymalna liczba punktów<span th:text="${taskDetails.max}"> </span></p>
-        <p>Opis zadania<span th:text="${taskDetails.description}"> </span></p>
+<div class="container col-6">
+    <div class="row mb-3">
+        <h1 class="display-3">Opis zadania</h1>
     </div>
+    <div class="row align-items-center">
+        <p>Nazwa zadania: <strong th:text="${taskDetails.name}"> </strong></p>
+        <p>Maksymalna liczba punktów: <strong th:text="${taskDetails.max}"> </strong></p>
+        <p>Opis zadania: <strong th:text="${taskDetails.description}"> </strong></p>
+    </div>
+</div>
 <footer th:insert="main::footer">
 </footer>
 </body>

@@ -1,6 +1,5 @@
 package pl.sda.tasktodo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sda.tasktodo.entity.Student;
@@ -17,12 +16,12 @@ import java.util.Optional;
 public class JpaStudentService implements StudentService{
     private final StudentRepository studentRepository;
     private final StudentTaskRepository studentTaskRepository;
-    @Autowired
     private LocalDateTime now;
 
-    public JpaStudentService(StudentRepository studentRepository, StudentTaskRepository studentTaskRepository) {
+    public JpaStudentService(StudentRepository studentRepository, StudentTaskRepository studentTaskRepository, LocalDateTime now) {
         this.studentRepository = studentRepository;
         this.studentTaskRepository = studentTaskRepository;
+        this.now = now;
     }
 
     @Override

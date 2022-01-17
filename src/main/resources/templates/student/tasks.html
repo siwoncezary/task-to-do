@@ -7,29 +7,35 @@
 <body>
 <nav th:replace="main::navigation">
 </nav>
-    <div class="fluid-container m-3">
-        <h1>Twoje zadania</h1>
-    </div>
-    <div class="fluid-container m-3">
-        <table th:class="${tableColor}">
-            <thead>
+<div class="container col-6">
+    <div class="row align-items-center">
+        <div class="row mb-3">
+            <h1 class="display-3">Twoje zadania</h1>
+        </div>
+        <div class="row mb-3">
+            <table th:class="${tableColor}">
+                <thead>
                 <tr>
                     <th>
                         Nazwa
                     </th>
                     <th>
-                        Termin ostatecznego wykonania
+                        Deadline
                     </th>
                     <th>
                         Termin wykonania
                     </th>
+                    <th>
+                        Operacje
+                    </th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr th:each="st: ${tasks}">
                     <td>
                         <div th:text="${st.getTask().getName()}">AA</div>
-                        <div th:text="${st.content}"></div>
+                        <p th:if="${st.note == 5}">bardzo dobry</p>
+                        <p th:unless="${st.note <= 2}">test zaliczony</p>
                     </td>
                     <td>
                         <span th:text="${st.getTask().getDeadline()}">AA</span>
@@ -38,16 +44,15 @@
                         <span th:text="${st.getFinishDate()}">BB</span>
                     </td>
                     <td>
-                        <p th:if="${st.note == 0}">Brak punktow</p>
-                        <p th:if="${st.note != 0}"><span th:text="${st.note}"> </span></p>
-                        <a th:href="@{/student/task/{id}(id = ${st.getId()})}">Przejdź do wykonania zadania</a>
-                        <a th:href="@{/student/task-details/{id}(id=${st.getId()})}">Przejdź do szczegółów zadania</a>
+                        <a class="btn btn-primary" th:href="@{/student/task/{id}(id = ${st.getId()})}">Wykonaj</a>
+                        <a class="btn btn-info" th:href="@{/student/task-details/{id}(id=${st.getId()})}">Szczegóły</a>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-<footer th:insert="main::footer">
-</footer>
+    <footer th:insert="main::footer">
+    </footer>
 </body>
 </html>

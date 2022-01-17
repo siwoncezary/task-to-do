@@ -5,32 +5,25 @@
 <head th:insert="main::head">
 </head>
 <body>
-    <nav th:replace="main::navigation">
-    </nav>
-    <div class="container m-3">
-        <div class="container">
-            <h2>Aplikacja z zadaniami</h2>
-        </div>
-        <h3>Konfiguracja</h3>
-        <ul>
-            <li>
+<nav th:replace="main::navigation">
+</nav>
+<div class="container col-6">
+    <div class="row align-center-items">
+        <div class="row">
+        <h2 class="display-6 mb-3">Aplikacja z zadaniami dla studentów</h2>
+
+        <h3 class="display-7 mb-3">Konfiguracja</h3>
+        <ul class="list-group">
+            <li class="list-group-item">
                 Domyślny rozmiar strony: <span th:text="${pageSize}"></span>
             </li>
-            <li>
+            <li class="list-group-item">
                 Domyślna strona: <span th:text="${pageStart}"></span>
-            </li>
-        </ul>
-        <div class="container">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a href="/student">Student</a>
-            </li>
-            <li class="nav-item">
-                <a href="/admin">Admin</a>
             </li>
         </ul>
         </div>
     </div>
+</div>
 <footer th:insert="main::footer">
 
 </footer>
